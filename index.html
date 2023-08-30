@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #shortenedURL {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">URL Shortener</h1>
+    <input type="text" id="originalURL" placeholder="Enter your URL">
+    <button onclick="shortenURL()">Shorten</button>
+    <p id="shortenedURL"></p>
+
+    <script>
+        var urlMap = {}; // Object to store original URLs and their shortened versions
+
+        function shortenURL() {
+            var originalURL = document.getElementById("originalURL").value;
+            if (originalURL === "") {
+                alert("Please enter a URL.");
+                return;
+            }
+
+            // Check if the URL has already been shortened
+            if (urlMap.hasOwnProperty(originalURL)) {
+                document.getElementById("shortenedURL").innerHTML = "Shortened URL: <a href='" + urlMap[originalURL] + "' target='_blank'>" + urlMap[originalURL] + "</a>";
+            } else {
+                // Simulate generating a short URL (you can replace this with your own logic)
+                var shortURL = "https://gitdev.me/" + generateRandomString(6);
+                urlMap[originalURL] = shortURL; // Store the mapping
+
+                document.getElementById("shortenedURL").innerHTML = "Shortened URL: <a href='" + shortURL + "' target='_blank'>" + shortURL + "</a>";
+            }
+        }
+
+        function generateRandomString(length) {
+            var characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var result = "";
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+    </script>
+</body>
+      </html>
+      
